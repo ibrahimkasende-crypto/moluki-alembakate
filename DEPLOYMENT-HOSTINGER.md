@@ -17,10 +17,12 @@ La machine locale peut utiliser une version plus récente. Le champ `engines` de
 | Étape | Commande |
 | --- | --- |
 | Installation | `npm install` |
-| Build | `npm run build` |
+| Build | `npm run build` (`next build --webpack`) |
 | Démarrage | `npm run start` |
 
 `npm run start` lance `next start`. Next.js écoute la variable `PORT` fournie par Hostinger, sinon le port 3000.
+
+Le build utilise Webpack. Le compilateur Turbopack de Next.js 16 s'interrompt sur le constructeur Hostinger.
 
 ## Variables d'environnement
 
