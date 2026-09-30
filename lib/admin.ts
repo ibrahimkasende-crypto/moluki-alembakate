@@ -3,17 +3,30 @@ import { cookies } from "next/headers"
 import { safeEqual } from "@/lib/store"
 
 const COOKIE = "ma_admin"
-const ADMIN_EMAIL = "moluki@alembakate.com"
-const ADMIN_PASSWORD = "Admin123456"
+
+function adminEmail() {
+  return process.env.ADMIN_EMAIL?.trim().toLowerCase() || ""
+}
+
+function adminPassword() {
+  return process.env.ADMIN_PASSWORD || ""
+}
+
+export function adminConfigured() {
+  return Boolean(adminEmail() && adminPassword())
+}
 
 export function adminToken() {
-  return createHmac("sha256", ADMIN_PASSWORD).update("moluki-alembakate-admin").digest("hex")
+  const password = adminPassword()
+  if (!password) return null
+  return createHmac("sha256", password).update("moluki-alembakate-admin").digest("hex")
 }
 
 export function adminCredentialsMatch(email: string, password: string) {
-  const sameEmail = safeEqual(email.trim().toLowerCase(), ADMIN_EMAIL)
-  const samePassword = safeEqual(password, ADMIN_PASSWORD)
-  return sameEmail && samePassword
+  const expectedEmail = adminEmail()
+  const expectedPassword = adminPassword()
+  if (!expectedEmail || !expectedPassword) return false
+  return safeEqual(email.trim().toLowerCase(), expectedEmail) && safeEqual(password, expectedPassword)
 }
 
 export async function isAdmin() {
@@ -30,6 +43,7 @@ export const adminCookie = {
   options: {
     httpOnly: true,
     sameSite: "lax" as const,
+    secure: process.env.NODE_ENV === "production",
     path: "/",
     maxAge: 60 * 60 * 12,
   },

@@ -4,7 +4,7 @@ export const site = {
   tagline: "L'élégance en mouvement.",
   description:
     "Moluki Alembakate, maison de vêtements masculine. Chemises, polos, complets, pantalons et tee-shirts, entre caractère, élégance et simplicité.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://moluki.newsystemcorps.com",
   email: "atelier@molukialembakate.com",
   whatsapp: (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "").replace(/\D/g, ""),
   instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "",

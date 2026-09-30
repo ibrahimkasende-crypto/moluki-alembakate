@@ -4,7 +4,8 @@ out
 build
 .vercel
 *.log
-.env*.local
+.env*
+!.env.example
 *.tsbuildinfo
 next-env.d.ts
 data/orders.json

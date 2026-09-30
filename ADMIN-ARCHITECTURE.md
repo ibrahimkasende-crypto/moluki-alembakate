@@ -38,7 +38,7 @@ Sur mobile, la barre devient un panneau. À partir de la tablette, elle se rédu
 
 ## Authentification et rôles
 
-Un seul accès aujourd’hui : compte et mot de passe fixés dans `lib/admin.ts`, cookie httpOnly signé. Le mot de passe n’est pas écrit dans le journal.
+Un seul accès aujourd’hui : `ADMIN_EMAIL` et `ADMIN_PASSWORD` dans l’environnement, cookie httpOnly signé. Le mot de passe n’est pas écrit dans le code ni dans le journal.
 
 Le rôle effectif de cette session est `owner`. Les permissions prévues :
 

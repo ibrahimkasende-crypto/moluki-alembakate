@@ -1,3 +1,8 @@
+/**
+ * Stockage JSON local sous data/. Ce n'est pas une base de production.
+ * Les dépôts dans lib/repositories sont le point de remplacement vers Supabase/PostgreSQL.
+ * Un redéploiement peut effacer ces fichiers s'ils ne sont pas conservés sur le disque de l'application.
+ */
 import { randomBytes, timingSafeEqual } from "crypto"
 import { mkdirSync, readFileSync, writeFileSync } from "fs"
 import { join } from "path"
