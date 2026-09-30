@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-outfit), "Helvetica Neue", sans-serif;
+  --font-serif: var(--font-cormorant), Georgia, serif;
+  --color-ink: #141311;
+  --color-ivory: #f3eee6;
+  --color-paper: #f7f3ec;
+  --color-wine: #6b2e3c;
+  --color-wine-deep: #4c1f2c;
+  --color-stone: #6f685f;
+  --color-line: #e3dcd2;
+  --color-metal: #b7aa96;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-outfit), "Helvetica Neue", sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #6b2e3c;
+  color: #f7f3ec;
+}
+
+:focus-visible {
+  outline: 1px solid #6b2e3c;
+  outline-offset: 3px;
+}
+
+@keyframes drift {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1.1) translate3d(-1.2%, -0.6%, 0);
+  }
+}
+
+.drift {
+  animation: drift 24s ease-in-out alternate infinite;
+}
+
+/* La photo maison inclut une casquette tierce et un téléphone.
+   Le cadrage garde le wordmark et le vêtement. */
+.house-frame {
+  container-type: size;
+}
+
+.house-crop {
+  transform: scale(2.12);
+  transform-origin: 50% 62%;
+}
+
+@container (min-aspect-ratio: 4/3) {
+  .house-crop {
+    transform: scale(1.42);
+    transform-origin: 44% 54%;
+  }
+}
+
+@media (max-width: 768px), (prefers-reduced-motion: reduce) {
+  .drift {
+    animation: none;
+  }
+}
+
+.scrim-bottom {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 62%;
+  background: linear-gradient(to top, rgb(20 19 17 / 0.84), rgb(20 19 17 / 0.4) 46%, transparent);
+  pointer-events: none;
+}
+
+.font-serif {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+.nav-link {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0 1px;
+  transition: background-size 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-link:hover {
+  background-size: 100% 1px;
+}
+
+.btn-shift {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-shift:hover {
+  transform: translateY(-2px);
+}
+
+.img-zoom {
+  transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group:hover .img-zoom {
+  transform: scale(1.045);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-link,
+  .btn-shift,
+  .img-zoom,
+  .group:hover .img-zoom {
+    transition: none;
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .group:hover .img-zoom {
+    transform: none;
+  }
+}

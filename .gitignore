@@ -1,0 +1,14 @@
+node_modules
+.next
+out
+build
+.vercel
+*.log
+.env*.local
+*.tsbuildinfo
+next-env.d.ts
+data/orders.json
+data/messages.json
+data/newsletter.json
+public/media/uploads/*
+!public/media/uploads/.gitkeep

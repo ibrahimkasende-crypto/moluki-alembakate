@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200">
+  <rect width="900" height="1200" fill="#141311"/>
+  <g fill="none" stroke="#f3eee6" stroke-width="1.4" stroke-linejoin="round">
+    <path d="M250 300 L140 390 L190 430 L270 350 L270 860 L630 860 L630 350 L710 430 L760 390 L650 300 L560 360 L450 300 L340 360 Z"/>
+    <path d="M360 330 L450 400 L540 330"/>
+    <path d="M450 400 L450 520"/>
+    <path d="M430 450 H470"/>
+    <path d="M430 490 H470"/>
+  </g>
+  <text x="450" y="980" text-anchor="middle" fill="#f3eee6" font-family="Georgia, serif" font-size="22" letter-spacing="8">POLO NOIR</text>
+</svg>
