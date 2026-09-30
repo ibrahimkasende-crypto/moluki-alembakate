@@ -311,14 +311,14 @@ export const mediaLibrary = [
   }),
   asset({
     id: "product-polo-ivoire",
-    src: "/media/products/polo-ivoire.svg",
-    alt: "Planche atelier du polo ivoire",
+    src: "/media/products/polo-ivoire.jpg",
+    alt: "Polo masculin clair, col et patte de boutons",
     category: "products",
     title: "Polo Ivoire",
-    position: "center",
+    position: "center 22%",
     product: "polo-ivoire",
     origin: "reference",
-    ratio: "1:1",
+    ratio: "3:4",
   }),
   asset({
     id: "product-polo-noir",
@@ -443,25 +443,25 @@ export const mediaLibrary = [
   }),
   asset({
     id: "product-pochette",
-    src: "/media/products/pochette.svg",
-    alt: "Planche atelier de la pochette",
+    src: "/media/products/pochette-main.jpg",
+    alt: "Mouchoir de poche ajusté sur un costume",
     category: "products",
     title: "Pochette",
-    position: "center",
+    position: "center 42%",
     product: "pochette",
     origin: "reference",
-    ratio: "1:1",
+    ratio: "3:4",
   }),
   asset({
     id: "product-pochette-2",
-    src: "/media/products/pochette-2.jpg",
-    alt: "Poche de veste, visuel de référence",
+    src: "/media/products/pochette-detail.jpg",
+    alt: "Détail du mouchoir de poche sur la veste",
     category: "products",
     title: "Pochette, seconde vue",
-    position: "62% 32%",
+    position: "center 28%",
     product: "pochette",
     origin: "reference",
-    ratio: "1:1",
+    ratio: "3:4",
   }),
   asset({
     id: "social-01",
@@ -647,7 +647,7 @@ export const videos = {
 
 export const homeStills = {
   chemise: "/media/editorial/chemise.jpg",
-  polo: "/media/editorial/polo.jpg",
+  polo: "/media/products/polo-ivoire.jpg",
   complet: "/media/editorial/world-b.jpg",
   essentiel: "/media/editorial/essentiel.jpg",
   col: "/media/editorial/detail-col.jpg",
@@ -661,7 +661,14 @@ export const homeStills = {
   lookA: "/media/editorial/look-a.jpg",
   lookB: "/media/editorial/look-b.jpg",
   lookC: "/media/editorial/look-c.jpg",
-  portrait: "/media/editorial/try-polo.jpg",
+  portrait: "/media/products/polo-ivoire.jpg",
   house: "/media/brand/wordmark.jpg",
   cta: "/media/editorial/cta.jpg",
 } as const
+
+export const maisonPillars = [
+  { id: "signature", label: "Signature", src: "/media/brand/wordmark.jpg", alt: "Wordmark bordeaux Moluki sur le jersey", position: "50% 56%" },
+  { id: "savoir-faire", label: "Savoir-faire", src: "/media/editorial/detail-couture.jpg", alt: "Détail de couture", position: "72% 42%" },
+  { id: "silhouette", label: "Silhouette", src: "/media/editorial/look-a.jpg", alt: "Silhouette masculine", position: "center 16%" },
+  { id: "mouvement", label: "Mouvement", src: "/media/editorial/world-b.jpg", alt: "Homme en marche", position: "center 28%" },
+] as const
