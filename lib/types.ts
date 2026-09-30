@@ -24,6 +24,14 @@ export type ProductColor = {
   hex: string
 }
 
+export type ProductVariant = {
+  id: string
+  size: string
+  color: string
+  stock: number
+  sku: string
+}
+
 export type Product = {
   id: string
   name: string
@@ -32,12 +40,15 @@ export type Product = {
   details: string
   price: number
   compareAtPrice?: number
-  category: CategorySlug
-  collection: CollectionSlug
+  category: string
+  collection: string
   images: GalleryImage[]
   sizes: string[]
   colors: ProductColor[]
   stock: number
+  sku?: string
+  archived?: boolean
+  variants?: ProductVariant[]
   featured: boolean
   isNew: boolean
   bestseller: boolean
@@ -58,7 +69,14 @@ export type CartItem = {
 
 export type DeliveryMethod = "standard" | "express"
 
-export type OrderStatus = "pending_payment" | "preparing" | "cancelled"
+export type OrderStatus = "pending_payment" | "confirmed" | "preparing" | "shipped" | "delivered" | "cancelled"
+
+export type PaymentStatus = "pending" | "paid" | "failed" | "not_charged"
+
+export type OrderEvent = {
+  at: string
+  status: OrderStatus
+}
 
 export type OrderItem = {
   productId: string
@@ -93,9 +111,11 @@ export type Order = {
   subtotal: number
   total: number
   note: string
+  internalNote?: string
+  history?: OrderEvent[]
   payment: {
     provider: "unconfigured"
-    status: "not_charged"
+    status: PaymentStatus
   }
 }
 

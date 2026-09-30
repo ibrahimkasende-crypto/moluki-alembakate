@@ -10,5 +10,11 @@ next-env.d.ts
 data/orders.json
 data/messages.json
 data/newsletter.json
+data/stock-movements.json
+data/audit.json
+data/promotions.json
+data/taxonomy.json
+data/settings.json
+data/content.json
 public/media/uploads/*
 !public/media/uploads/.gitkeep

@@ -1,25 +1,30 @@
-import { CampaignImage } from "@/components/campaign-image"
-import { EditorialImage } from "@/components/editorial-image"
+import Link from "next/link"
+import { ArrowIcon } from "@/components/icons"
+import { Media } from "@/components/media"
+import { FadeIn, ImageReveal, TextReveal } from "@/components/motion"
+import { homeStills } from "@/lib/media"
 
 export function BrandStory() {
   return (
-    <section className="overflow-x-clip">
-      <CampaignImage id="hero-campagne" sizes="100vw" className="h-[78vh] min-h-[520px] md:h-[90vh]" />
-      <div className="grid gap-10 px-5 py-24 md:grid-cols-12 md:px-14 md:py-36">
-        <p className="font-serif text-4xl leading-[1.05] md:col-span-6 md:text-6xl">Le nom se pose. Le reste s&apos;efface.</p>
-        <p className="max-w-md self-end text-base leading-relaxed text-stone md:col-span-4 md:col-start-8">
-          Deux lignes, bordeaux sur ivoire. Moluki Alembakate ne raconte pas une légende. La maison coupe, et le vêtement parle.
-        </p>
-      </div>
-      <div className="px-3 md:px-8">
-        <div className="md:ml-auto md:w-[42%]">
-          <EditorialImage id="campaign-bordeaux" ratio="3:4" reveal sizes="(min-width: 768px) 42vw, 100vw" />
+    <section className="section-space bg-ivory" aria-label="La maison">
+      <div className="shell grid items-end gap-10 md:grid-cols-12 md:gap-8">
+        <div className="md:col-span-5 md:pb-6">
+          <p className="text-[11px] uppercase tracking-[0.28em] text-stone">La maison</p>
+          <TextReveal text="Le nom se pose." className="mt-5 font-serif text-4xl leading-[0.95] md:text-6xl" />
+          <FadeIn delay={0.12}>
+            <p className="mt-6 max-w-sm text-base text-stone">Deux lignes, bordeaux sur ivoire.</p>
+            <Link href="/about" className="nav-link group mt-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em]">
+              Lire
+              <ArrowIcon className="transition-transform duration-500 group-hover:translate-x-1" />
+            </Link>
+          </FadeIn>
         </div>
+        <figure className="relative aspect-[4/5] overflow-hidden md:col-span-6 md:col-start-7">
+          <ImageReveal variant="center">
+            <Media src={homeStills.house} alt="Wordmark bordeaux Moluki Alembakate sur le jersey ivoire" crop sizes="(min-width: 768px) 45vw, 100vw" />
+          </ImageReveal>
+        </figure>
       </div>
-      <p className="px-5 py-20 font-serif text-3xl leading-tight md:px-14 md:py-32 md:text-5xl">
-        Une maison.
-        <span className="block">Pas un catalogue.</span>
-      </p>
     </section>
   )
 }

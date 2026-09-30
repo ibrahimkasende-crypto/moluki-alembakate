@@ -595,3 +595,73 @@ export const imageSizes = {
   half: "(min-width: 768px) 50vw, 100vw",
   third: "(min-width: 1024px) 33vw, 50vw",
 } as const
+
+/**
+ * Médias de direction pour la homepage.
+ * Ce ne sont pas des campagnes officielles Moluki.
+ * Licence : Pexels ou Unsplash, usage commercial autorisé.
+ * Remplacer le fichier en gardant le même chemin, ou changer `src` ici.
+ */
+export const demoDirectionNote =
+  "Visuels de direction, en attendant le shooting de la maison. Ils ne constituent pas une campagne officielle Moluki Alembakate."
+
+export type VideoClip = {
+  id: string
+  src: string
+  poster: string
+  credit: string
+}
+
+export const videos = {
+  hero: {
+    id: "hero-fashion",
+    src: "/media/videos/hero-fashion.mp4",
+    poster: "/media/editorial/look-b.jpg",
+    credit: "Pexels 10269331",
+  },
+  campaign01: {
+    id: "campaign-01",
+    src: "/media/videos/campaign-01.mp4",
+    poster: "/media/editorial/world-b.jpg",
+    credit: "Pexels 8043614",
+  },
+  campaign02: {
+    id: "campaign-02",
+    src: "/media/videos/campaign-02.mp4",
+    poster: "/media/editorial/cta.jpg",
+    credit: "Pexels 6840826",
+  },
+  lookbook01: {
+    id: "lookbook-01",
+    src: "/media/videos/lookbook-01.mp4",
+    poster: "/media/editorial/look-a.jpg",
+    credit: "Pexels 8731437",
+  },
+  lookbook02: {
+    id: "lookbook-02",
+    src: "/media/videos/lookbook-02.mp4",
+    poster: "/media/editorial/look-c.jpg",
+    credit: "Pexels 8275752",
+  },
+} as const satisfies Record<string, VideoClip>
+
+export const homeStills = {
+  chemise: "/media/editorial/chemise.jpg",
+  polo: "/media/editorial/polo.jpg",
+  complet: "/media/editorial/world-b.jpg",
+  essentiel: "/media/editorial/essentiel.jpg",
+  col: "/media/editorial/detail-col.jpg",
+  tissu: "/media/editorial/detail-tissu.jpg",
+  bouton: "/media/editorial/detail-bouton.jpg",
+  couture: "/media/editorial/detail-couture.jpg",
+  finition: "/media/editorial/detail-finition.jpg",
+  etiquette: "/media/editorial/detail-etiquette.jpg",
+  pantalon: "/media/editorial/pantalon.jpg",
+  accessoire: "/media/editorial/accessoire.jpg",
+  lookA: "/media/editorial/look-a.jpg",
+  lookB: "/media/editorial/look-b.jpg",
+  lookC: "/media/editorial/look-c.jpg",
+  portrait: "/media/editorial/try-polo.jpg",
+  house: "/media/brand/wordmark.jpg",
+  cta: "/media/editorial/cta.jpg",
+} as const

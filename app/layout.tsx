@@ -1,14 +1,14 @@
 import type { Metadata } from "next"
-import { Cormorant_Garamond, Outfit } from "next/font/google"
+import { Outfit, Syne } from "next/font/google"
 import { Toaster } from "sonner"
 import { Providers } from "@/components/providers"
 import { site } from "@/lib/site"
 import "./globals.css"
 
-const serif = Cormorant_Garamond({
+const display = Syne({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-cormorant",
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-syne",
   display: "swap",
 })
 
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${serif.variable} ${sans.variable}`}>
+    <html lang="fr" className={`${display.variable} ${sans.variable}`}>
       <body>
         <a
           href="#contenu"
@@ -60,7 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               background: "#f7f3ec",
               color: "#141311",
               border: "1px solid #e3dcd2",
-              borderRadius: 0,
+              borderRadius: 999,
               fontSize: "13px",
             },
           }}

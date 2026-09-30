@@ -3,65 +3,67 @@
 import Link from "next/link"
 import { useRef } from "react"
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
-import { Frame } from "@/components/frame"
-import { visuals } from "@/lib/visuals"
+import { CinematicVideo } from "@/components/cinematic-video"
+import { ArrowIcon } from "@/components/icons"
+import { videos } from "@/lib/media"
 
 export function Hero() {
   const reduce = useReducedMotion()
+  const settle = reduce ? { opacity: 1, y: 0 } : undefined
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
-  const y = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["0%", "16%"])
-  const lines = reduce ? { opacity: 1, y: 0 } : undefined
+  const veil = useTransform(scrollYProgress, [0.28, 0.92], [0, 1])
 
   return (
-    <section ref={ref} className="relative h-[100svh] min-h-[680px] overflow-hidden bg-ink">
-      <motion.div style={{ y }} className="absolute inset-x-0 -top-[8%] h-[120%]">
-        <Frame visual={visuals.hero} priority sizes="100vw" className="drift" />
-      </motion.div>
+    <section ref={ref} className="relative h-[88svh] min-h-[560px] overflow-hidden bg-ink text-ivory md:h-[100svh] md:min-h-[680px]">
+      <div className="absolute inset-0">
+        <CinematicVideo src={videos.hero.src} poster={videos.hero.poster} eager className="scale-[1.04]" />
+      </div>
       <div className="scrim-bottom" />
-      <div className="relative z-10 flex h-full flex-col justify-end px-5 pb-24 md:px-14 md:pb-28">
+      {reduce ? null : (
+        <motion.div aria-hidden style={{ opacity: veil }} className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-b from-transparent via-paper/30 to-paper" />
+      )}
+      <div className="relative z-10 flex h-full flex-col justify-end px-5 pb-14 md:px-12 md:pb-16">
         <motion.p
-          className="font-serif uppercase text-ivory"
-          initial={reduce ? false : { opacity: 0, y: 28 }}
-          animate={lines ?? { opacity: 1, y: 0 }}
+          className="font-serif uppercase leading-[0.78] text-[clamp(3.4rem,12vw,8.4rem)]"
+          initial={reduce ? false : { opacity: 0, y: 24 }}
+          animate={settle ?? { opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
-          <span className="block text-[clamp(3.15rem,16vw,10.5rem)] leading-[0.78] tracking-[0.04em]">Moluki</span>
+          Moluki
         </motion.p>
         <motion.p
-          className="mt-3 font-serif uppercase tracking-[0.38em] text-ivory text-[clamp(1.05rem,2.6vw,2rem)]"
-          initial={reduce ? false : { opacity: 0, y: 18 }}
-          animate={lines ?? { opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-3 text-[12px] uppercase tracking-[0.42em] text-ivory/80"
+          initial={reduce ? false : { opacity: 0, y: 12 }}
+          animate={settle ?? { opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.15 }}
         >
           Alembakate
         </motion.p>
         <motion.p
-          className="mt-6 max-w-sm text-[11px] uppercase leading-relaxed tracking-[0.22em] text-ivory/80"
+          className="mt-5 text-[11px] uppercase tracking-[0.28em] text-ivory/75"
           initial={reduce ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.35 }}
         >
-          L&apos;élégance en mouvement.
+          Élégance en mouvement
         </motion.p>
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 12 }}
-          animate={lines ?? { opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.55 }}
+          initial={reduce ? false : { opacity: 0, y: 10 }}
+          animate={settle ?? { opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.5 }}
         >
-          <Link
-            href="/collections/nouvelle-saison"
-            className="nav-link btn-shift mt-8 inline-flex py-3 text-[11px] uppercase tracking-[0.2em] text-ivory"
-          >
+          <Link href="/collections/nouvelle-saison" className="btn-pill group mt-6 bg-ivory text-ink">
             Découvrir la collection
+            <ArrowIcon className="ml-2 transition-transform duration-500 group-hover:translate-x-1" />
           </Link>
         </motion.div>
       </div>
       <a
-        href="#decouverte"
-        className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-[10px] uppercase tracking-[0.32em] text-ivory/75"
+        href="#marque"
+        className="absolute bottom-6 right-5 z-10 text-[10px] uppercase tracking-[0.28em] text-ivory/70 md:right-12"
       >
-        Scroll to discover
+        Défiler
       </a>
     </section>
   )

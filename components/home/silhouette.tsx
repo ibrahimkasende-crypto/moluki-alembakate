@@ -1,31 +1,21 @@
 "use client"
 
-import { useRef } from "react"
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
-import { Frame } from "@/components/frame"
-import { visuals } from "@/lib/visuals"
+import { CinematicVideo } from "@/components/cinematic-video"
+import { TextReveal } from "@/components/motion"
+import { videos } from "@/lib/media"
 
 export function Silhouette() {
-  const reduce = useReducedMotion()
-  const ref = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] })
-  const y = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["6%", "-6%"])
-  const reveal = useTransform(scrollYProgress, [0.15, 0.4], [0, 1])
-
   return (
-    <section ref={ref} className="relative min-h-[100svh] overflow-hidden bg-ink text-ivory">
-      <motion.div style={{ y }} className="absolute inset-x-0 -top-[8%] h-[116%]">
-        <Frame visual={visuals.silhouette} sizes="100vw" />
-      </motion.div>
+    <section className="relative min-h-[88svh] overflow-hidden bg-ink text-ivory md:min-h-[100svh]" aria-label="Campagne">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 z-10 h-28 bg-gradient-to-b from-ivory to-transparent" />
+      <div className="absolute inset-0">
+        <CinematicVideo src={videos.campaign01.src} poster={videos.campaign01.poster} />
+      </div>
       <div className="scrim-bottom" />
-      <motion.div style={{ opacity: reduce ? 1 : reveal }} className="relative z-10 flex min-h-[100svh] flex-col justify-end px-5 py-16 md:justify-center md:px-16">
-        <p className="text-[11px] uppercase tracking-[0.28em]">The Moluki man</p>
-        <p className="mt-6 max-w-sm font-serif text-4xl leading-tight md:text-6xl">
-          Confident.
-          <span className="block">Contemporary.</span>
-          <span className="block">Unmistakable.</span>
-        </p>
-      </motion.div>
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-24 bg-gradient-to-b from-transparent to-paper" />
+      <div className="relative z-10 flex min-h-[88svh] flex-col justify-end px-5 py-20 md:min-h-[100svh] md:px-14">
+        <TextReveal text="L'homme Moluki" className="max-w-4xl font-serif text-5xl leading-[0.9] md:text-8xl" />
+      </div>
     </section>
   )
 }

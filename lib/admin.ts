@@ -1,12 +1,19 @@
 import { createHmac, timingSafeEqual } from "crypto"
 import { cookies } from "next/headers"
+import { safeEqual } from "@/lib/store"
 
 const COOKIE = "ma_admin"
+const ADMIN_EMAIL = "moluki@alembakate.com"
+const ADMIN_PASSWORD = "Admin123456"
 
 export function adminToken() {
-  const password = process.env.ADMIN_PASSWORD
-  if (!password) return null
-  return createHmac("sha256", password).update("moluki-alembakate-admin").digest("hex")
+  return createHmac("sha256", ADMIN_PASSWORD).update("moluki-alembakate-admin").digest("hex")
+}
+
+export function adminCredentialsMatch(email: string, password: string) {
+  const sameEmail = safeEqual(email.trim().toLowerCase(), ADMIN_EMAIL)
+  const samePassword = safeEqual(password, ADMIN_PASSWORD)
+  return sameEmail && samePassword
 }
 
 export async function isAdmin() {

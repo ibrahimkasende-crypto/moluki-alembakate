@@ -2,8 +2,9 @@ import type { Metadata } from "next"
 import { BrandStory } from "@/components/home/brand-story"
 import { Categories } from "@/components/home/categories"
 import { Details } from "@/components/home/details"
-import { EditorialGallery } from "@/components/home/editorial-gallery"
 import { EditorialProducts } from "@/components/home/editorial-products"
+import { FeaturedCollection } from "@/components/home/featured-collection"
+import { FeaturedShop } from "@/components/home/featured-shop"
 import { Hero } from "@/components/home/hero"
 import { Intro } from "@/components/home/intro"
 import { LookbookBand } from "@/components/home/lookbook-band"
@@ -20,13 +21,17 @@ export const metadata: Metadata = {
   description: site.description,
 }
 
-const editorialSlugs = ["tee-shirt-griffe", "chemise-atelier", "complet-marine", "pantalon-ivoire"]
+const spotlightSlugs = ["chemise-atelier", "complet-marine", "tee-shirt-griffe"]
+const shopSlugs = ["polo-noir", "pantalon-ivoire", "chemise-nuit", "polo-ivoire", "pantalon-noir", "pochette"]
+
+function pick(slugs: string[]) {
+  const products = getAllProducts()
+  return slugs.map((slug) => products.find((product) => product.slug === slug)).filter((product) => product !== undefined)
+}
 
 export default function HomePage() {
-  const products = getAllProducts()
-  const editorial = editorialSlugs
-    .map((slug) => products.find((product) => product.slug === slug))
-    .filter((product) => product !== undefined)
+  const spotlight = pick(spotlightSlugs)
+  const shop = pick(shopSlugs)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ClothingStore",
@@ -40,14 +45,15 @@ export default function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Hero />
       <Intro />
-      <EditorialGallery />
+      <FeaturedCollection />
       <Categories />
       <LookbookBand />
+      <EditorialProducts products={spotlight} />
       <Details />
       <Silhouette />
-      <EditorialProducts products={editorial} />
-      <BrandStory />
       <SocialGrid />
+      <BrandStory />
+      <FeaturedShop products={shop} />
       <Newsletter />
     </>
   )

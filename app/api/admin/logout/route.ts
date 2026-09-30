@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server"
 import { adminCookie } from "@/lib/admin"
 
-export async function POST() {
-  const response = NextResponse.json({ ok: true })
+export async function POST(request: Request) {
+  const response = NextResponse.redirect(new URL("/admin", request.url), 303)
   response.cookies.set(adminCookie.name, "", { ...adminCookie.options, maxAge: 0 })
   return response
 }

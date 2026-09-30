@@ -1,55 +1,49 @@
-"use client"
-
 import Link from "next/link"
-import { AnimatePresence, motion, useReducedMotion } from "motion/react"
-import { useState } from "react"
+import { ArrowIcon } from "@/components/icons"
+import { CinematicVideo } from "@/components/cinematic-video"
 import { Media } from "@/components/media"
-import { looks } from "@/lib/catalog"
+import { ImageReveal, TextReveal } from "@/components/motion"
+import { homeStills, videos } from "@/lib/media"
+
+const frames = [
+  { index: "01", kind: "still" as const, src: homeStills.lookA, variant: "up" as const },
+  { index: "02", kind: "video" as const, src: videos.lookbook01.src, poster: videos.lookbook01.poster, variant: "left" as const },
+  { index: "03", kind: "video" as const, src: videos.lookbook02.src, poster: videos.lookbook02.poster, variant: "right" as const },
+]
 
 export function LookbookBand() {
-  const reduce = useReducedMotion()
-  const [index, setIndex] = useState(0)
-  const look = looks[index]
-  const total = String(looks.length).padStart(2, "0")
-
   return (
-    <section className="overflow-hidden bg-ink text-ivory" aria-label="Lookbook">
-      <div className="relative min-h-[100svh] overflow-hidden">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={look.id}
-            className="absolute inset-0"
-            initial={reduce ? false : { opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={reduce ? undefined : { opacity: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <Media src={look.image} alt={look.title} position={look.position} sizes="100vw" />
-          </motion.div>
-        </AnimatePresence>
-        <div className="scrim-bottom" />
-        <div className="relative z-10 flex min-h-[100svh] flex-col justify-between px-5 py-10 md:px-12 md:py-14">
-          <p className="text-[11px] uppercase tracking-[0.28em] text-ivory/80">Lookbook</p>
-          <div>
-            <p className="text-[11px] uppercase tracking-[0.28em]">Look {String(index + 1).padStart(2, "0")}</p>
-            <h2 className="mt-3 font-serif text-[clamp(2.4rem,12vw,7.5rem)] uppercase leading-[0.85] tracking-[0.03em]">{look.title}</h2>
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-ivory/80">{look.text}</p>
-            <div className="mt-8 flex flex-wrap items-center gap-6 text-[11px] uppercase tracking-[0.2em]">
-              <button type="button" onClick={() => setIndex((value) => (value - 1 + looks.length) % looks.length)}>
-                Précédent
-              </button>
-              <button type="button" onClick={() => setIndex((value) => (value + 1) % looks.length)}>
-                Suivant
-              </button>
-              <span>
-                {String(index + 1).padStart(2, "0")} / {total}
-              </span>
-              <Link href={look.href} className="underline underline-offset-4">
-                La pièce
-              </Link>
-            </div>
-          </div>
+    <section className="relative bg-ink text-ivory" aria-label="Lookbook">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 z-10 h-24 bg-gradient-to-b from-paper to-transparent" />
+      <div className="shell pb-8 pt-24 md:pt-32">
+        <div className="flex items-end justify-between gap-6">
+          <TextReveal text="Lookbook" className="font-serif text-5xl leading-[0.92] md:text-7xl" />
+          <Link href="/lookbook" className="nav-link group hidden items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-ivory/70 md:inline-flex">
+            Séquence
+            <ArrowIcon className="transition-transform duration-500 group-hover:translate-x-1" />
+          </Link>
         </div>
+      </div>
+      <div className="space-y-6 px-5 pb-20 md:space-y-10 md:px-12 md:pb-28">
+        {frames.map((frame) => (
+          <figure key={frame.index} data-explore="Explorer" className="group relative min-h-[78svh] overflow-hidden bg-ink">
+            <ImageReveal variant={frame.variant}>
+              {frame.kind === "still" ? (
+                <Media src={frame.src} alt="" sizes="100vw" className="img-zoom" />
+              ) : (
+                <CinematicVideo src={frame.src} poster={frame.poster!} />
+              )}
+            </ImageReveal>
+            <figcaption className="pointer-events-none absolute bottom-6 left-6 text-[11px] uppercase tracking-[0.28em] text-ivory/80 md:bottom-10 md:left-10">
+              {frame.index}
+              <span className="text-ivory/40"> / 03</span>
+            </figcaption>
+          </figure>
+        ))}
+        <Link href="/lookbook" className="nav-link group inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-ivory/80 md:hidden">
+          Séquence
+          <ArrowIcon className="transition-transform duration-500 group-hover:translate-x-1" />
+        </Link>
       </div>
     </section>
   )

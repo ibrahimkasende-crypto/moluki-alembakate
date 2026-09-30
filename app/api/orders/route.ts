@@ -74,7 +74,14 @@ export async function POST(request: Request) {
     payment,
   }
 
-  for (const [productId, quantity] of demand) adjustStock(productId, -quantity)
+  for (const item of items) {
+    adjustStock(item.productId, -item.quantity, {
+      type: "sale",
+      size: item.size,
+      color: item.color,
+      reason: `Commande ${id}`,
+    })
+  }
   saveOrder(order)
   return NextResponse.json({ orderId: order.id, total: order.total, payment: order.payment })
 }
